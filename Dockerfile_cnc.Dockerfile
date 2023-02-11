@@ -11,4 +11,3 @@ RUN go get github.com/go-sql-driver/mysql
 RUN go build -o debug/cnc cnc/*.go
 
 CMD ["./debug/cnc"]
-# CMD ["tcpdump", "-i", "any"]

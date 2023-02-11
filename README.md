@@ -20,7 +20,7 @@ Modified parts are mentionned in the 3rd commit of the repo, here is little expl
 ## Used docker
 
 - `loader` attacks bots by forcing them to load and execute mirai code
-- `reporter` runs the `scanListen` program, not really used here
+- `reporter` runs the `scanListen` program, not really used here because the Mirai code is in DEBUG mode
 - `host` hosts mirai code as a http server (or tftp - see explanations)
 - `cnc` runs the CNC go programs
 - `db` SQL database for CNC
@@ -45,6 +45,10 @@ After downlading it, the loader run the mirai code.
 ## Mirai code
 
 In our example, the mirai code only connects to the CNC (for now ?)
+
+Normally the mirai code is also contacting the Scanner and attcking, but as we use a debug version of mirai, the scan and attack are not launched
+
+A good idea would be that @3-dd-1 make some commits to run a non-debug version of mirai code :)
 
 ## Run
 
