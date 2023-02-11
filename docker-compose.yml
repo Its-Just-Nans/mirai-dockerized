@@ -1,0 +1,74 @@
+version: "3.9"
+services:
+  loader:
+    build:
+      context: .
+      dockerfile: Dockerfile_loader.Dockerfile
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.5
+    cap_add:
+      - ALL
+    tty: true
+  reporter:
+    build:
+      context: .
+      dockerfile: Dockerfile_reporter.Dockerfile
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.10
+    tty: true
+  host:
+    build:
+      context: .
+      dockerfile: Dockerfile_host.Dockerfile
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.20
+    tty: true
+  cnc:
+    build:
+      context: .
+      dockerfile: Dockerfile_cnc.Dockerfile
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.6
+    cap_add:
+      - ALL
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: shift
+      MYSQL_PASSWORD: pwd
+      DATABASE_NAME: mirai
+    networks:
+        vpcbr:
+          ipv4_address: 10.5.0.4
+    volumes:
+      - ./cnc_db.sql:/docker-entrypoint-initdb.d/init.sql
+
+  bot1:
+    build:
+      context: .
+      dockerfile: Dockerfile_bot.Dockerfile
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.7
+    tty: true
+  bot2:
+    build:
+      context: .
+      dockerfile: Dockerfile_bot.Dockerfile
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.8
+    tty: true
+
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.0.0/16
+         gateway: 10.5.0.1
