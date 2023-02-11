@@ -284,7 +284,7 @@ static void handle_event(struct server_worker *wrker, struct epoll_event *ev)
                 {
                     case TELNET_READ_IACS:
                         consumed = connection_consume_iacs(conn);
-                        if(i==0 || i ==2){
+                        if(i==0 || i == 1){
                             consumed = 0;
                             i++;
                         }
