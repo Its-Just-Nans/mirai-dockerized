@@ -17,6 +17,16 @@ Modified parts are mentionned in the 3rd commit of the repo, here is little expl
 - `Mirai-Source-Code/mirai/bot/table.c` we updated the IP of the CNC and the scanner using `./enc string <ip>`
 - `Mirai-Source-Code/mirai/cnc/main.go` we changed creads of the SQL database because we are running the database out of the CNC (see the docker-compose.yml)
 
+## Used docker
+
+- `loader` attacks bots by forcing them to load and execute mirai code
+- `reporter` runs the `scanListen` program, not really used here
+- `host` hosts mirai code as a http server (or tftp - see explanations)
+- `cnc` runs the CNC go programs
+- `db` SQL database for CNC
+- `bot1` simulates a bot, runs a telnet server, has `busybox` and `wget` installed
+- `bot2` simulates a bot, runs a telnet server, has `busybox` and `wget` installed
+
 ## Explanations
 
 ## Loader
@@ -39,6 +49,7 @@ In our example, the mirai code only connects to the CNC (for now ?)
 ## Run
 
 - You need to have docker (and docker compose installed)
+- The project is using the `ip.txt` file to know who to attack, it's easier to only put one bot (one line) to see the attack
 
 ```sh
 docker compose up --build
