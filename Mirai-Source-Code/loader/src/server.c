@@ -181,6 +181,8 @@ static void *worker(void *arg)
     }
 }
 
+int i = 0;
+
 static void handle_event(struct server_worker *wrker, struct epoll_event *ev)
 {
     struct connection *conn = wrker->srv->estab_conns[ev->data.fd];
@@ -263,6 +265,7 @@ static void handle_event(struct server_worker *wrker, struct epoll_event *ev)
             }
 #ifdef DEBUG
             printf("TELIN: %.*s\n", ret, conn->rdbuf + conn->rdbuf_pos);
+            hexDump("TELIN", conn->rdbuf + conn->rdbuf_pos, ret);
 #endif
             conn->rdbuf_pos += ret;
             conn->last_recv = time(NULL);
@@ -281,6 +284,10 @@ static void handle_event(struct server_worker *wrker, struct epoll_event *ev)
                 {
                     case TELNET_READ_IACS:
                         consumed = connection_consume_iacs(conn);
+                        if(i==0 || i ==2){
+                            consumed = 0;
+                            i++;
+                        }
                         if (consumed)
                             conn->state_telnet = TELNET_USER_PROMPT;
                         break;

