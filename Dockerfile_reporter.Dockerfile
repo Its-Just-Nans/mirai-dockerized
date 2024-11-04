@@ -1,4 +1,4 @@
-FROM debian
+FROM debian:bullseye
 
 RUN apt update && apt install -y golang git
 

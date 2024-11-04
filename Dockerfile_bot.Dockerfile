@@ -1,4 +1,4 @@
-FROM debian
+FROM debian:bullseye
 
 RUN apt update && apt install -y wget telnet tcpdump net-tools telnetd xinetd busybox
 RUN (echo 'root'; echo 'root') | passwd root

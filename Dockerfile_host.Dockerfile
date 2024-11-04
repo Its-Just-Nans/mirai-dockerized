@@ -1,18 +1,18 @@
-FROM debian
+FROM debian:bullseye
 
 RUN apt update && apt install -y gcc wget apache2 electric-fence tftpd xinetd
 
 RUN service apache2 start
 
 RUN mkdir /etc/xcompile
-RUN cd /etc/xcompile && wget https://www.uclibc.org/downloads/binaries/0.9.30.1/cross-compiler-armv4l.tar.bz2
-RUN cd /etc/xcompile && wget https://www.uclibc.org/downloads/binaries/0.9.30.1/cross-compiler-i586.tar.bz2
-RUN cd /etc/xcompile && wget https://www.uclibc.org/downloads/binaries/0.9.30.1/cross-compiler-m68k.tar.bz2
-RUN cd /etc/xcompile && wget https://www.uclibc.org/downloads/binaries/0.9.30.1/cross-compiler-mips.tar.bz2
-RUN cd /etc/xcompile && wget https://www.uclibc.org/downloads/binaries/0.9.30.1/cross-compiler-mipsel.tar.bz2
-RUN cd /etc/xcompile && wget https://www.uclibc.org/downloads/binaries/0.9.30.1/cross-compiler-powerpc.tar.bz2
-RUN cd /etc/xcompile && wget https://www.uclibc.org/downloads/binaries/0.9.30.1/cross-compiler-sh4.tar.bz2
-RUN cd /etc/xcompile && wget https://www.uclibc.org/downloads/binaries/0.9.30.1/cross-compiler-sparc.tar.bz2
+RUN cd /etc/xcompile && wget https://landley.net/aboriginal/downloads/binaries/cross-compiler-armv4l.tar.gz
+RUN cd /etc/xcompile && wget https://landley.net/aboriginal/downloads/binaries/cross-compiler-i586.tar.gz
+RUN cd /etc/xcompile && wget https://landley.net/aboriginal/downloads/binaries/cross-compiler-m68k.tar.gz
+RUN cd /etc/xcompile && wget https://landley.net/aboriginal/downloads/binaries/cross-compiler-mips.tar.gz
+RUN cd /etc/xcompile && wget https://landley.net/aboriginal/downloads/binaries/cross-compiler-mipsel.tar.gz
+RUN cd /etc/xcompile && wget https://landley.net/aboriginal/downloads/binaries/cross-compiler-powerpc.tar.gz
+RUN cd /etc/xcompile && wget https://landley.net/aboriginal/downloads/binaries/cross-compiler-sh4.tar.gz
+RUN cd /etc/xcompile && wget https://landley.net/aboriginal/downloads/binaries/cross-compiler-sparc.tar.gz
 
 COPY ./cross_compile.sh /app/cross_compile.sh
 RUN bash /app/cross_compile.sh
