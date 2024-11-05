@@ -17,6 +17,8 @@ Modified parts are mentionned in the 3rd commit of the repo, here is little expl
 - `Mirai-Source-Code/mirai/bot/table.c` we updated the IP of the CNC and the scanner using `./enc string <ip>`
 - `Mirai-Source-Code/mirai/cnc/main.go` we changed creads of the SQL database because we are running the database out of the CNC (see the docker-compose.yml)
 
+See also https://github.com/Its-Just-Nans/mirai-dockerized/issues/1
+
 ## Used docker
 
 - `loader` attacks bots by forcing them to load and execute mirai code
