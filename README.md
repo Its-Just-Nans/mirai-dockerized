@@ -18,6 +18,7 @@ Modified parts are mentionned in the 3rd commit of the repo, here is little expl
 - `Mirai-Source-Code/mirai/cnc/main.go` we changed creads of the SQL database because we are running the database out of the CNC (see the docker-compose.yml)
 
 See also https://github.com/Its-Just-Nans/mirai-dockerized/issues/1
+All changes can be seen here: https://github.com/Its-Just-Nans/mirai-dockerized/compare/source...Its-Just-Nans:mirai-dockerized:main?w=1
 
 ## Used docker
 
