@@ -19,7 +19,7 @@ Modified parts are mentionned in the 3rd commit of the repo, here is little expl
 
 See also https://github.com/Its-Just-Nans/mirai-dockerized/issues/1
 
-All changes can be seen [here](https://github.com/Its-Just-Nans/mirai-dockerized/compare/source...Its-Just-Nans:mirai-dockerized:main?w=1)
+All changes can be seen [here](https://github.com/Its-Just-Nans/mirai-dockerized/compare/source...Its-Just-Nans:mirai-dockerized:main?diff=split&w=1)
 
 ## Used docker
 
