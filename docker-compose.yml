@@ -30,6 +30,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile_cnc.Dockerfile
+    ports:
+      - 2323:23 # normal telnet
+      - 10101:101 # API
     networks:
       vpcbr:
         ipv4_address: 10.5.0.6
