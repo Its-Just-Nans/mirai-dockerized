@@ -18,6 +18,7 @@ func NewAdmin(conn net.Conn) *Admin {
 }
 
 func (this *Admin) Handle() {
+    fmt.Println("admin connected")
     this.conn.Write([]byte("\033[?1049h"))
     this.conn.Write([]byte("\xFF\xFB\x01\xFF\xFB\x03\xFF\xFC\x22"))
 
@@ -27,6 +28,7 @@ func (this *Admin) Handle() {
 
     headerb, err := ioutil.ReadFile("prompt.txt")
     if err != nil {
+        fmt.Println("prompt.txt not found")
         return
     }
 
@@ -48,6 +50,8 @@ func (this *Admin) Handle() {
     if err != nil {
         return
     }
+    this.conn.Write([]byte(username))
+    this.conn.Write([]byte(password))
 
     this.conn.SetDeadline(time.Now().Add(120 * time.Second))
     this.conn.Write([]byte("\r\n"))

@@ -24,7 +24,10 @@ void connection_open(struct connection *conn)
     conn->bin = NULL;
     conn->echo_load_pos = 0;
 #ifdef DEBUG
-    printf("[FD%d] Called connection_open\n", conn->fd);
+    printf("[FD%d] Called connection_open for %d.%d.%d.%d:%d %s:%s\n", conn->fd,
+                conn->info.addr & 0xff, (conn->info.addr >> 8) & 0xff, (conn->info.addr >> 16) & 0xff, (conn->info.addr >> 24) & 0xff,
+                ntohs(conn->info.port),
+                conn->info.user, conn->info.pass);
 #endif
 
     pthread_mutex_unlock(&conn->lock);

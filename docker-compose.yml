@@ -45,6 +45,7 @@ services:
       MYSQL_USER: shift
       MYSQL_PASSWORD: pwd
       DATABASE_NAME: mirai
+      MYSQL_ROOT_HOST: '%'
     networks:
         vpcbr:
           ipv4_address: 10.5.0.4

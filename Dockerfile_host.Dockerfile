@@ -19,8 +19,6 @@ RUN bash /app/cross_compile.sh
 
 WORKDIR /app
 
-COPY ./helper_path.sh /app/
-
 RUN mkdir /app/release
 COPY ./build_bot.sh /app/
 COPY ./Mirai-Source-Code/mirai/bot/ /app/bot

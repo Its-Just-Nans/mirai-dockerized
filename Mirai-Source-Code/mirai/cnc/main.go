@@ -60,7 +60,7 @@ func initialHandler(conn net.Conn) {
     if err != nil || l <= 0 {
         return
     }
-    fmt.Println("initialHandler buf:", buf)
+    fmt.Println("initialHandler buf:", buf, "l:", l)
     if l == 4 && buf[0] == 0x00 && buf[1] == 0x00 && buf[2] == 0x00 {
         if buf[3] > 0 {
             string_len := make([]byte, 1)

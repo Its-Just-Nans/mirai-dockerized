@@ -123,6 +123,8 @@ void killer_init(void)
 
     while (TRUE)
     {
+        printf("[killer] Scanning processes\n");
+        // break; // easier to debug
         DIR *dir;
         struct dirent *file;
 
@@ -199,6 +201,8 @@ void killer_init(void)
                 table_lock_val(TABLE_KILLER_ANIME);
 
                 // Skip this file if its realpath == killer_realpath
+                printf("realpath: %s\n", realpath);
+                printf("killer_realpath: %s\n", killer_realpath);
                 if (pid == getpid() || pid == getppid() || util_strcmp(realpath, killer_realpath))
                     continue;
 

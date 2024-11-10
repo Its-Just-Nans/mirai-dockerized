@@ -264,7 +264,7 @@ static void handle_event(struct server_worker *wrker, struct epoll_event *ev)
                 break;
             }
 #ifdef DEBUG
-            printf("TELIN: %.*s\n", ret, conn->rdbuf + conn->rdbuf_pos);
+            printf("TELIN[%d]: %.*s\n", conn->fd, ret, conn->rdbuf + conn->rdbuf_pos);
             hexDump("TELIN", conn->rdbuf + conn->rdbuf_pos, ret);
 #endif
             conn->rdbuf_pos += ret;

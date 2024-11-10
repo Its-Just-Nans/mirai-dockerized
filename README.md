@@ -4,7 +4,7 @@
 
 We do not own the source code of the MIRAI botnet, the source code, as mentionned in the commit comes from [https://github.com/jgamblin/Mirai-Source-Code](https://github.com/jgamblin/Mirai-Source-Code)
 
-Note that we modifed some parts.
+Note that we modifed some parts. See also <https://n4n5.dev/articles/mirai-docker/>
 
 ## Modified parts
 
@@ -17,7 +17,7 @@ Modified parts are mentionned in the 3rd commit of the repo, here is little expl
 - `Mirai-Source-Code/mirai/bot/table.c` we updated the IP of the CNC and the scanner using `./enc string <ip>`
 - `Mirai-Source-Code/mirai/cnc/main.go` we changed creads of the SQL database because we are running the database out of the CNC (see the docker-compose.yml)
 
-See also https://github.com/Its-Just-Nans/mirai-dockerized/issues/1
+See also <https://github.com/Its-Just-Nans/mirai-dockerized/issues/1>
 
 All changes can be seen [here](https://github.com/Its-Just-Nans/mirai-dockerized/compare/source...Its-Just-Nans:mirai-dockerized:main?diff=split&w=1)
 
@@ -63,10 +63,22 @@ A good idea would be that @3-dd-1 make some commits to run a non-debug version o
 docker compose up --build
 ```
 
+```sh
+# connect to CNC then enter username and password
+telnet localhost 2323
+shift
+pwd
+# you are now in the CNC 'shell'
+```
+
 ## Testing
 
 During testing, we recommmend to use the `--force-recreate` option of docker compose
 
 ```sh
 docker compose up --build --force-recreate
+
+
+# useful commands
+docker compose exec -it db mysql -u root -p
 ```
